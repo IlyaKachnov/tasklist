@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface TaskRepository extends PagingAndSortingRepository<Task, Long>, CrudRepository<Task, Long> {
     List<Task> findAll();
+
+    List<Task> findAllByStatus(boolean status);
 }

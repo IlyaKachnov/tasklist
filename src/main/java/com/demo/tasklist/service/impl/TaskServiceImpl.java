@@ -2,6 +2,7 @@ package com.demo.tasklist.service.impl;
 
 import com.demo.tasklist.dao.entity.Task;
 import com.demo.tasklist.dao.repository.TaskRepository;
+import com.demo.tasklist.exception.ObjectNotFoundException;
 import com.demo.tasklist.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,10 +35,17 @@ public class TaskServiceImpl implements TaskService {
     @Transactional(readOnly = true)
     public Task findTaskById(Long taskId) {
         return taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException(""));
+                .orElseThrow(() -> new ObjectNotFoundException("Task not found by id:" + taskId));
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<Task> findTasksByStatus(boolean status) {
+        return taskRepository.findAllByStatus(status);
+    }
+
+    @Override
+    @Transactional
     public Task createTask(Task task) {
         return taskRepository.save(task);
     }
@@ -46,7 +54,7 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     public Task updateTask(Task task) {
         taskRepository.findById(task.getId())
-                .orElseThrow(() -> new RuntimeException());
+                .orElseThrow(() -> new ObjectNotFoundException("Task not found by id:" + task.getId()));
         return taskRepository.save(task);
     }
 
@@ -55,7 +63,7 @@ public class TaskServiceImpl implements TaskService {
     public void deleteTask(Long taskId) {
         taskRepository.findById(taskId)
                 .ifPresentOrElse(task -> taskRepository.deleteById(taskId),
-                        () -> new RuntimeException()
+                        () -> new ObjectNotFoundException("Task not found by id:" + taskId)
                 );
     }
 }

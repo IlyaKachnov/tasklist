@@ -12,6 +12,8 @@ public interface TaskService {
 
     Task findTaskById(Long taskId);
 
+    List<Task> findTasksByStatus(boolean status);
+
     Task createTask(Task task);
 
     Task updateTask(Task task);
