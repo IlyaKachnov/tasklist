@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: init
+      author: Kachnov Ilya
+      changes:
+        - sqlFile:
+            path: init.sql
+            relativeToChangelogFile: true

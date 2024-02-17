@@ -1,0 +1,61 @@
+package com.demo.tasklist.service.impl;
+
+import com.demo.tasklist.dao.entity.Task;
+import com.demo.tasklist.dao.repository.TaskRepository;
+import com.demo.tasklist.service.TaskService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class TaskServiceImpl implements TaskService {
+
+    private final TaskRepository taskRepository;
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Task> findAllTasks() {
+        return taskRepository.findAll();
+    }
+
+    @Override
+    public Page<Task> findTasksPageable(int offset, int size) {
+        return taskRepository.findAll(PageRequest.of(offset, size));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Task findTaskById(Long taskId) {
+        return taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException(""));
+    }
+
+    @Override
+    public Task createTask(Task task) {
+        return taskRepository.save(task);
+    }
+
+    @Override
+    @Transactional
+    public Task updateTask(Task task) {
+        taskRepository.findById(task.getId())
+                .orElseThrow(() -> new RuntimeException());
+        return taskRepository.save(task);
+    }
+
+    @Override
+    @Transactional
+    public void deleteTask(Long taskId) {
+        taskRepository.findById(taskId)
+                .ifPresentOrElse(task -> taskRepository.deleteById(taskId),
+                        () -> new RuntimeException()
+                );
+    }
+}
