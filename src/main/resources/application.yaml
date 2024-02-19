@@ -10,3 +10,12 @@ spring:
     password: password
   liquibase:
     liquibase-schema: liquibase
+  security:
+    user:
+      password: password # password should be stored in password storage like Vault etc
+      name: login
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true

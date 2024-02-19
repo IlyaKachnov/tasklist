@@ -41,10 +41,9 @@
 
 		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.7.0</version>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.3.0</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -55,6 +54,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
+			<version>6.1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
 			<version>6.1.4</version>
 		</dependency>
 

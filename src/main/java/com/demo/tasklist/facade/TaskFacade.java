@@ -65,7 +65,7 @@ public class TaskFacade {
 
     public Page<Task> findTasksPageable(int offset, int size, Boolean status) {
         if (status != null) {
-           return taskService.findTasksPageable(offset, size, status);
+            return taskService.findTasksPageable(offset, size, status);
         }
         return taskService.findTasksPageable(offset, size);
     }
