@@ -44,4 +44,14 @@ public class ControllerExceptionHandler {
         return ResponseEntity.notFound().build();
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    public final ResponseEntity<?> handleRuntimeException(
+            RuntimeException e,
+            WebRequest webRequest
+    ) {
+        log.error("Caught RuntimeException for request {}", webRequest);
+        log.error("Caught RuntimeException", e);
+        return ResponseEntity.internalServerError().build();
+    }
+
 }

@@ -21,14 +21,13 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Task> findAllTasks() {
-        return taskRepository.findAll();
+    public Page<Task> findTasksPageable(int offset, int size) {
+        return taskRepository.findAll(PageRequest.of(offset, size));
     }
 
     @Override
-    public Page<Task> findTasksPageable(int offset, int size) {
-        return taskRepository.findAll(PageRequest.of(offset, size));
+    public Page<Task> findTasksPageable(int offset, int size, Boolean status) {
+        return taskRepository.findAllByStatus(status, PageRequest.of(offset, size));
     }
 
     @Override
@@ -38,11 +37,6 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(() -> new ObjectNotFoundException("Task not found by id:" + taskId));
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<Task> findTasksByStatus(boolean status) {
-        return taskRepository.findAllByStatus(status);
-    }
 
     @Override
     @Transactional

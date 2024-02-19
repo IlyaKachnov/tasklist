@@ -1,6 +1,8 @@
 package com.demo.tasklist.mapper;
 
 import com.demo.tasklist.dao.entity.Task;
+import com.demo.tasklist.dto.NotificationDto;
+import com.demo.tasklist.dto.NotificationStatus;
 import com.demo.tasklist.dto.TaskDto;
 import com.demo.tasklist.dto.TaskPageDto;
 import org.mapstruct.Mapper;

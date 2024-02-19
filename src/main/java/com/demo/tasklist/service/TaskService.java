@@ -3,16 +3,13 @@ package com.demo.tasklist.service;
 import com.demo.tasklist.dao.entity.Task;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 public interface TaskService {
-    List<Task> findAllTasks();
 
     Page<Task> findTasksPageable(int offset, int size);
 
-    Task findTaskById(Long taskId);
+    Page<Task> findTasksPageable(int offset, int size, Boolean status);
 
-    List<Task> findTasksByStatus(boolean status);
+    Task findTaskById(Long taskId);
 
     Task createTask(Task task);
 
