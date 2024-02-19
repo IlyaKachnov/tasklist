@@ -11,8 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -55,9 +53,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public void deleteTask(Long taskId) {
-        taskRepository.findById(taskId)
-                .ifPresentOrElse(task -> taskRepository.deleteById(taskId),
-                        () -> new ObjectNotFoundException("Task not found by id:" + taskId)
-                );
+        taskRepository.findById(taskId).orElseThrow(() -> new ObjectNotFoundException("Task not found by id:" + taskId));
+        taskRepository.deleteById(taskId);
     }
 }

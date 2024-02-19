@@ -31,8 +31,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
-                        authorizationManagerRequestMatcherRegistry.requestMatchers("tasks/**").authenticated()
-                                .requestMatchers("/events/**").permitAll())
+                        authorizationManagerRequestMatcherRegistry.requestMatchers("tasks/**").authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable);
         return http.build();

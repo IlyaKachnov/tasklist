@@ -8,7 +8,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableConfigurationProperties(DataSourceProperties.class)
-@EnableScheduling
 public class TasklistApplication {
 
 	public static void main(String[] args) {
